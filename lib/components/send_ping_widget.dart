@@ -393,6 +393,7 @@ class _SendPingWidgetState extends State<SendPingWidget> {
                                     );
                                   },
                                 );
+                                return;
                               }
                               if (functions.isListEmpty(
                                   buttonUsersRecordList.toList())) {
@@ -403,6 +404,25 @@ class _SendPingWidgetState extends State<SendPingWidget> {
                                       title: Text('상대방이 핑퐁에 가입되어있지 않습니다.'),
                                       content: Text(
                                           '핑퐁이 익명의 초대장을 발송했어요. 상대방이 핑퐁에 가입하면 이 메시지가 전달됩니다.'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('Ok'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                                await actions.sendSlackMessage(
+                                  textController3.text,
+                                );
+                              } else {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      content: Text('핑이 성공적으로 전달되었습니다!'),
                                       actions: [
                                         TextButton(
                                           onPressed: () =>
@@ -433,24 +453,8 @@ class _SendPingWidgetState extends State<SendPingWidget> {
                               await PingpongRecord.collection
                                   .doc()
                                   .set(pingpongCreateData);
-                              await actions.sendSlackMessage(
-                                textController3.text,
-                              );
-                              await showDialog(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    content: Text('핑이 성공적으로 전달되었습니다!'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(alertDialogContext),
-                                        child: Text('Ok'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
+
+
                               Navigator.pop(context);
                             },
                             text: '보내기',

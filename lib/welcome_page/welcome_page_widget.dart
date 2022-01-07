@@ -47,9 +47,9 @@ class _WelcomePageWidgetState extends State<WelcomePageWidget> {
               }
               List<PingpongRecord> columnPingpongRecordList = snapshot.data;
               // Return an empty Container when the document does not exist.
-              if (snapshot.data.isEmpty) {
-                return Container();
-              }
+              // if (snapshot.data.isEmpty) {
+              //   return Container();
+              // }
               final columnPingpongRecord = columnPingpongRecordList.isNotEmpty
                   ? columnPingpongRecordList.first
                   : null;
@@ -123,12 +123,14 @@ class _WelcomePageWidgetState extends State<WelcomePageWidget> {
                                 EdgeInsetsDirectional.fromSTEB(0, 24, 0, 24),
                             child: FFButtonWidget(
                               onPressed: () async {
-                                final pingpongUpdateData =
-                                    createPingpongRecordData(
-                                  receiver: currentUserReference,
-                                );
-                                await columnPingpongRecord.reference
-                                    .update(pingpongUpdateData);
+                                if (columnPingpongRecord != null) {
+                                  final pingpongUpdateData =
+                                  createPingpongRecordData(
+                                    receiver: currentUserReference,
+                                  );
+                                  await columnPingpongRecord.reference
+                                      .update(pingpongUpdateData);
+                                }
                                 await Navigator.push(
                                   context,
                                   MaterialPageRoute(

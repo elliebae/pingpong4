@@ -77,6 +77,7 @@ class _SignupWidgetState extends State<SignupWidget> {
         backgroundColor: Colors.white,
         body: Padding(
           padding: EdgeInsetsDirectional.fromSTEB(30, 0, 30, 0),
+          child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -509,13 +510,13 @@ class _SignupWidgetState extends State<SignupWidget> {
                           if (!formKey.currentState.validate()) {
                             return;
                           }
-                          if (checkboxListTileValue1) {
+                          if (checkboxListTileValue1 & checkboxListTileValue2) {
                             if (passwordTextController.text !=
                                 confirmPasswordTextController.text) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    "Passwords don't match!",
+                                    "비밀번호가 일치하지 않습니다!",
                                   ),
                                 ),
                               );
@@ -538,14 +539,25 @@ class _SignupWidgetState extends State<SignupWidget> {
                             await UsersRecord.collection
                                 .doc(user.uid)
                                 .update(usersCreateData);
+                            print("*****");
+                            await Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => WelcomePageWidget(),
+                              ),
+                              (r) => false,
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  "이용약관과 개인정보 처리방침에 동의해주세요!",
+                                ),
+                              ),
+                            );
+                            return;
                           }
-                          await Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => WelcomePageWidget(),
-                            ),
-                            (r) => false,
-                          );
+
                         },
                         text: '시작하기',
                         options: FFButtonOptions(
@@ -570,6 +582,7 @@ class _SignupWidgetState extends State<SignupWidget> {
               ),
             ],
           ),
+      ),
         ),
       ),
     );

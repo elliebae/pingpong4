@@ -213,6 +213,27 @@ class _AlertWidgetState extends State<AlertWidget> {
                                                                           .doc()
                                                                           .set(
                                                                               reportCreateData);
+                                                                      await actions
+                                                                          .sendReportMessage();
+                                                                      await showDialog(
+                                                                        context: context,
+                                                                        builder:
+                                                                            (alertDialogContext) {
+                                                                          return AlertDialog(
+                                                                            content: Text(
+                                                                                '신고가 접수되었습니다.'),
+                                                                            actions: [
+                                                                              TextButton(
+                                                                                onPressed: () =>
+                                                                                    Navigator.pop(
+                                                                                        alertDialogContext),
+                                                                                child: Text(
+                                                                                    'Ok'),
+                                                                              ),
+                                                                            ],
+                                                                          );
+                                                                        },
+                                                                      );
                                                                       ;
                                                                     },
                                                                     child: Text(
@@ -222,27 +243,7 @@ class _AlertWidgetState extends State<AlertWidget> {
                                                               );
                                                             },
                                                           );
-                                                          await actions
-                                                              .sendReportMessage();
-                                                          await showDialog(
-                                                            context: context,
-                                                            builder:
-                                                                (alertDialogContext) {
-                                                              return AlertDialog(
-                                                                content: Text(
-                                                                    '신고가 접수되었습니다.'),
-                                                                actions: [
-                                                                  TextButton(
-                                                                    onPressed: () =>
-                                                                        Navigator.pop(
-                                                                            alertDialogContext),
-                                                                    child: Text(
-                                                                        'Ok'),
-                                                                  ),
-                                                                ],
-                                                              );
-                                                            },
-                                                          );
+
                                                         },
                                                         child: Text(
                                                           '신고하기',
