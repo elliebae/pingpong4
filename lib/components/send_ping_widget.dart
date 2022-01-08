@@ -449,6 +449,10 @@ class _SendPingWidgetState extends State<SendPingWidget> {
                                   '(알 수 없음)',
                                 ),
                                 receiverNumber: textController3.text,
+                                customerId: functions.getReceiver(
+                                    buttonUsersRecordList
+                                        .map((e) => e.reference)
+                                        .toList()).id,
                               );
                               await PingpongRecord.collection
                                   .doc()

@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -10,9 +12,25 @@ import 'package:pingpong4/landing_page/landing_page_widget.dart';
 import 'package:pingpong4/home_page/home_page_widget.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 
+import 'package:onesignal_flutter/onesignal_flutter.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+  OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
+
+  OneSignal.shared.setAppId("e5279be4-e90b-4cce-aa4d-c582afe89e57");
+
+// // The promptForPushNotificationsWithUserResponse function will show the iOS push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
+//   OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
+//     print("Accepted permission: $accepted");
+//   });
+
+  // OneSignal.shared.init("YOUR ONESIGNAL APP ID", iOSSettings: {
+  //   OSiOSSettings.autoPrompt: false,
+  //   OSiOSSettings.inAppLaunchUrl: false
+  // });
 
   runApp(MyApp());
 }
@@ -21,6 +39,8 @@ class MyApp extends StatefulWidget {
   // This widget is the root of your application.
   @override
   _MyAppState createState() => _MyAppState();
+  
+
 }
 
 class _MyAppState extends State<MyApp> {

@@ -1,3 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
+
+import '../custom_code/actions/index.dart' as actions;
+
 import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -259,6 +265,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                         if (user == null) {
                           return;
                         }
+
+                        //savePlayerId 호출
+                        await actions.savePlayerId();
 
                         await Navigator.pushAndRemoveUntil(
                           context,

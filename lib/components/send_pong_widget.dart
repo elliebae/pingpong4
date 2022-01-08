@@ -282,6 +282,7 @@ class _SendPongWidgetState extends State<SendPongWidget> {
                                 message: textController.text,
                                 createdAt: getCurrentTimestamp,
                                 senderName: currentUserDisplayName,
+                                customerId: containerPingpongRecord.sender.id,
                               );
                               await PingpongRecord.collection
                                   .doc()

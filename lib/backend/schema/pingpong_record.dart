@@ -35,6 +35,12 @@ abstract class PingpongRecord
   @BuiltValueField(wireName: 'receiver_number')
   String get receiverNumber;
 
+  //주석
+  @nullable
+  @BuiltValueField(wireName: 'customer_id')
+  String get customerId;
+  //
+
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
@@ -43,7 +49,8 @@ abstract class PingpongRecord
     ..ping = false
     ..message = ''
     ..senderName = ''
-    ..receiverNumber = '';
+    ..receiverNumber = ''
+    ..customerId = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('Pingpong');
@@ -74,6 +81,7 @@ Map<String, dynamic> createPingpongRecordData({
   DateTime createdAt,
   String senderName,
   String receiverNumber,
+  String customerId,
 }) =>
     serializers.toFirestore(
         PingpongRecord.serializer,
@@ -84,4 +92,5 @@ Map<String, dynamic> createPingpongRecordData({
           ..message = message
           ..createdAt = createdAt
           ..senderName = senderName
-          ..receiverNumber = receiverNumber));
+          ..receiverNumber = receiverNumber
+          ..customerId = customerId));
