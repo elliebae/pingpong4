@@ -9,7 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class WelcomePageWidget extends StatefulWidget {
-  const WelcomePageWidget({Key key}) : super(key: key);
+  const WelcomePageWidget({
+    Key key,
+    this.authenticatedUser,
+  }) : super(key: key);
+
+  final DocumentReference authenticatedUser;
 
   @override
   _WelcomePageWidgetState createState() => _WelcomePageWidgetState();
@@ -123,12 +128,14 @@ class _WelcomePageWidgetState extends State<WelcomePageWidget> {
                                 EdgeInsetsDirectional.fromSTEB(0, 24, 0, 24),
                             child: FFButtonWidget(
                               onPressed: () async {
-                                final pingpongUpdateData =
-                                    createPingpongRecordData(
-                                  receiver: currentUserReference,
-                                );
-                                await columnPingpongRecord.reference
-                                    .update(pingpongUpdateData);
+                                if (columnPingpongRecord != null) {
+                                  final pingpongUpdateData =
+                                      createPingpongRecordData(
+                                    receiver: currentUserReference,
+                                  );
+                                  await columnPingpongRecord.reference
+                                      .update(pingpongUpdateData);
+                                }
                                 await Navigator.push(
                                   context,
                                   MaterialPageRoute(

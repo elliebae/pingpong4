@@ -7,6 +7,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import 'schema/users_record.dart';
 import 'schema/pingpong_record.dart';
 import 'schema/report_record.dart';
+import 'schema/one_signal_ids_record.dart';
 import 'schema/serializers.dart';
 
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,6 +17,7 @@ export 'schema/serializers.dart';
 export 'schema/users_record.dart';
 export 'schema/pingpong_record.dart';
 export 'schema/report_record.dart';
+export 'schema/one_signal_ids_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Stream<List<UsersRecord>> queryUsersRecord(
@@ -60,6 +62,23 @@ Future<List<ReportRecord>> queryReportRecordOnce(
         int limit = -1,
         bool singleRecord = false}) =>
     queryCollectionOnce(ReportRecord.collection, ReportRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+/// Functions to query OneSignalIdsRecords (as a Stream and as a Future).
+Stream<List<OneSignalIdsRecord>> queryOneSignalIdsRecord(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollection(
+        OneSignalIdsRecord.collection, OneSignalIdsRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+Future<List<OneSignalIdsRecord>> queryOneSignalIdsRecordOnce(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollectionOnce(
+        OneSignalIdsRecord.collection, OneSignalIdsRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
 Stream<List<T>> queryCollection<T>(
