@@ -6,7 +6,7 @@
    <application
         android:label="pingpong4"
         tools:replace="android:label"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/launcher_icon"
         android:requestLegacyExternalStorage="true">
 
         <activity
@@ -40,7 +40,8 @@
             android:name="flutterEmbedding"
             android:value="2" />
 
+       <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
 
 
-    </application>
+   </application>
 </manifest>

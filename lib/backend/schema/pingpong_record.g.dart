@@ -72,6 +72,13 @@ class _$PingpongRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.customerId;
+    if (value != null) {
+      result
+        ..add('customer_id')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.reference;
     if (value != null) {
       result
@@ -127,6 +134,10 @@ class _$PingpongRecordSerializer
           result.receiverNumber = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'customer_id':
+          result.customerId = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -156,6 +167,8 @@ class _$PingpongRecord extends PingpongRecord {
   @override
   final String receiverNumber;
   @override
+  final String customerId;
+  @override
   final DocumentReference<Object> reference;
 
   factory _$PingpongRecord([void Function(PingpongRecordBuilder) updates]) =>
@@ -169,6 +182,7 @@ class _$PingpongRecord extends PingpongRecord {
       this.createdAt,
       this.senderName,
       this.receiverNumber,
+      this.customerId,
       this.reference})
       : super._();
 
@@ -191,6 +205,7 @@ class _$PingpongRecord extends PingpongRecord {
         createdAt == other.createdAt &&
         senderName == other.senderName &&
         receiverNumber == other.receiverNumber &&
+        customerId == other.customerId &&
         reference == other.reference;
   }
 
@@ -201,12 +216,14 @@ class _$PingpongRecord extends PingpongRecord {
             $jc(
                 $jc(
                     $jc(
-                        $jc($jc($jc(0, ping.hashCode), sender.hashCode),
-                            receiver.hashCode),
-                        message.hashCode),
-                    createdAt.hashCode),
-                senderName.hashCode),
-            receiverNumber.hashCode),
+                        $jc(
+                            $jc($jc($jc(0, ping.hashCode), sender.hashCode),
+                                receiver.hashCode),
+                            message.hashCode),
+                        createdAt.hashCode),
+                    senderName.hashCode),
+                receiverNumber.hashCode),
+            customerId.hashCode),
         reference.hashCode));
   }
 
@@ -220,6 +237,7 @@ class _$PingpongRecord extends PingpongRecord {
           ..add('createdAt', createdAt)
           ..add('senderName', senderName)
           ..add('receiverNumber', receiverNumber)
+          ..add('customerId', customerId)
           ..add('reference', reference))
         .toString();
   }
@@ -259,6 +277,10 @@ class PingpongRecordBuilder
   set receiverNumber(String receiverNumber) =>
       _$this._receiverNumber = receiverNumber;
 
+  String _customerId;
+  String get customerId => _$this._customerId;
+  set customerId(String customerId) => _$this._customerId = customerId;
+
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
   set reference(DocumentReference<Object> reference) =>
@@ -278,6 +300,7 @@ class PingpongRecordBuilder
       _createdAt = $v.createdAt;
       _senderName = $v.senderName;
       _receiverNumber = $v.receiverNumber;
+      _customerId = $v.customerId;
       _reference = $v.reference;
       _$v = null;
     }
@@ -306,6 +329,7 @@ class PingpongRecordBuilder
             createdAt: createdAt,
             senderName: senderName,
             receiverNumber: receiverNumber,
+            customerId: customerId,
             reference: reference);
     replace(_$result);
     return _$result;

@@ -1,3 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
+
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
@@ -8,6 +11,9 @@ import '../landing_page/landing_page_widget.dart';
 import '../welcome_page/welcome_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../custom_code/actions/index.dart' as actions;
+
 
 class SignupWidget extends StatefulWidget {
   const SignupWidget({Key key}) : super(key: key);
@@ -422,7 +428,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                         onChanged: (newValue) =>
                             setState(() => checkboxListTileValue1 = newValue),
                         title: Text(
-                          '이용약관 동의',
+                          '이용약관 동의 (필수)',
                           textAlign: TextAlign.start,
                           style: FlutterFlowTheme.bodyText1.override(
                             fontFamily: 'GmarketSans',
@@ -466,7 +472,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                         onChanged: (newValue) =>
                             setState(() => checkboxListTileValue2 = newValue),
                         title: Text(
-                          '개인정보 처리방침 동의',
+                          '개인정보 처리방침 동의 (필수)',
                           textAlign: TextAlign.start,
                           style: FlutterFlowTheme.bodyText1.override(
                             fontFamily: 'GmarketSans',
@@ -540,6 +546,10 @@ class _SignupWidgetState extends State<SignupWidget> {
                                 .doc(user.uid)
                                 .update(usersCreateData);
                             print("*****");
+
+                            //savePlayerId 호출
+                            await actions.savePlayerId();
+
                             await Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(

@@ -1,3 +1,5 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
+
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -88,7 +90,7 @@ class _SendPingWidgetState extends State<SendPingWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      '내가 좋아하는 사람에게 핑을 보내세요. \n핑은 메시지와 함께 익명으로 전달됩니다.',
+                      '핑은 \'내 닉네임\'으로만 전달됩니다.\n상대방은 내가 누구인지 알 수 없어요!',
                       textAlign: TextAlign.center,
                       style: FlutterFlowTheme.bodyText2.override(
                         fontFamily: 'GmarketSans',
@@ -401,13 +403,15 @@ class _SendPingWidgetState extends State<SendPingWidget> {
                                   context: context,
                                   builder: (alertDialogContext) {
                                     return AlertDialog(
-                                      title: Text('상대방이 핑퐁에 가입되어있지 않습니다.'),
+                                      title: Text('받는 분이 아직 핑퐁에 가입하지 않았어요!'),
                                       content: Text(
-                                          '핑퐁이 익명의 초대장을 발송했어요. 상대방이 핑퐁에 가입하면 이 메시지가 전달됩니다.'),
+                                          '대신 받는 분에게 익명의 초대장을 발송했어요. 핑퐁이 이 메시지를 보관하고 있다가 받는 분이 핑퐁에 가입하는대로 전달할게요.'),
                                       actions: [
                                         TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(alertDialogContext),
+                                          onPressed: () async {
+                                                Navigator.pop(alertDialogContext);
+                                                Navigator.pop(context);
+                                          },
                                           child: Text('Ok'),
                                         ),
                                       ],
@@ -449,11 +453,24 @@ class _SendPingWidgetState extends State<SendPingWidget> {
                                   '(알 수 없음)',
                                 ),
                                 receiverNumber: textController3.text,
+                                customerId: functions.getReceiver(
+                                    buttonUsersRecordList
+                                        .map((e) => e.reference)
+                                        .toList()).id,
                               );
                               await PingpongRecord.collection
                                   .doc()
                                   .set(pingpongCreateData);
 
+                              //firebase analytics
+                              await FirebaseAnalytics.instance
+                                  .logEvent(
+                                  name: 'send_ping',
+                                  parameters: {
+                                    'sender_id': currentUserUid,
+                                    'receiver_number': textController3
+                                  }
+                              );
 
                               Navigator.pop(context);
                             },
