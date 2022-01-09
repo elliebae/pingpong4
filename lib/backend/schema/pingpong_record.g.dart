@@ -72,7 +72,6 @@ class _$PingpongRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    //주석
     value = object.customerId;
     if (value != null) {
       result
@@ -80,7 +79,6 @@ class _$PingpongRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    //
     value = object.reference;
     if (value != null) {
       result
@@ -215,18 +213,18 @@ class _$PingpongRecord extends PingpongRecord {
   int get hashCode {
     return $jf($jc(
         $jc(
-          $jc(
             $jc(
                 $jc(
                     $jc(
-                        $jc($jc($jc(0, ping.hashCode), sender.hashCode),
-                            receiver.hashCode),
-                        message.hashCode),
-                    createdAt.hashCode),
-                senderName.hashCode),
-            receiverNumber.hashCode),
-        customerId.hashCode),
-      reference.hashCode));
+                        $jc(
+                            $jc($jc($jc(0, ping.hashCode), sender.hashCode),
+                                receiver.hashCode),
+                            message.hashCode),
+                        createdAt.hashCode),
+                    senderName.hashCode),
+                receiverNumber.hashCode),
+            customerId.hashCode),
+        reference.hashCode));
   }
 
   @override
@@ -251,7 +249,6 @@ class PingpongRecordBuilder
 
   bool _ping;
   bool get ping => _$this._ping;
-
   set ping(bool ping) => _$this._ping = ping;
 
   DocumentReference<Object> _sender;
@@ -280,11 +277,9 @@ class PingpongRecordBuilder
   set receiverNumber(String receiverNumber) =>
       _$this._receiverNumber = receiverNumber;
 
-  //주석
   String _customerId;
   String get customerId => _$this._customerId;
   set customerId(String customerId) => _$this._customerId = customerId;
-  //
 
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;

@@ -13,24 +13,21 @@ import 'package:pingpong4/home_page/home_page_widget.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 
 import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
+  //Remove this method to stop OneSignal Debugging
   OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
 
   OneSignal.shared.setAppId("e5279be4-e90b-4cce-aa4d-c582afe89e57");
 
-// // The promptForPushNotificationsWithUserResponse function will show the iOS push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
-//   OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
-//     print("Accepted permission: $accepted");
-//   });
-
-  // OneSignal.shared.init("YOUR ONESIGNAL APP ID", iOSSettings: {
-  //   OSiOSSettings.autoPrompt: false,
-  //   OSiOSSettings.inAppLaunchUrl: false
-  // });
+// The promptForPushNotificationsWithUserResponse function will show the iOS push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
+  OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
+    print("Accepted permission: $accepted");
+  });
 
   runApp(MyApp());
 }
@@ -76,19 +73,14 @@ class _MyAppState extends State<MyApp> {
       ],
       supportedLocales: const [Locale('en', '')],
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: initialUser == null || displaySplashImage
-          ? Container(
-              color: Colors.transparent,
-              child: Builder(
-                builder: (context) => Image.asset(
-                  'assets/images/splash_screen_v1.gif',
-                  fit: BoxFit.cover,
-                ),
-              ),
-            )
-          : currentUser.loggedIn
-              ? HomePageWidget()
-              : LandingPageWidget(),
+      home: AnimatedSplashScreen(
+        splash: Image.asset(
+          'assets/images/splash_screen_v1.gif',
+        ),
+        splashIconSize: double.maxFinite,
+        backgroundColor: Color(0x9F00FF),
+        nextScreen: currentUser.loggedIn ? HomePageWidget() : LandingPageWidget(),
+        )
     );
   }
 }

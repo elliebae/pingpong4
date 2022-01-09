@@ -428,7 +428,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                         onChanged: (newValue) =>
                             setState(() => checkboxListTileValue1 = newValue),
                         title: Text(
-                          '이용약관 동의',
+                          '이용약관 동의 (필수)',
                           textAlign: TextAlign.start,
                           style: FlutterFlowTheme.bodyText1.override(
                             fontFamily: 'GmarketSans',
@@ -472,7 +472,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                         onChanged: (newValue) =>
                             setState(() => checkboxListTileValue2 = newValue),
                         title: Text(
-                          '개인정보 처리방침 동의',
+                          '개인정보 처리방침 동의 (필수)',
                           textAlign: TextAlign.start,
                           style: FlutterFlowTheme.bodyText1.override(
                             fontFamily: 'GmarketSans',

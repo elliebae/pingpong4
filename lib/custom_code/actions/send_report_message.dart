@@ -16,7 +16,7 @@ import 'package:http/http.dart' as http;
 Future<http.Response> sendReportMessage() async {
   return http.post(
     Uri.parse(
-        'https://hooks.slack.com/services/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'),
+        ''),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
