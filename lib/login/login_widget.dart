@@ -71,7 +71,7 @@ class _LoginWidgetState extends State<LoginWidget> {
         ),
         backgroundColor: Colors.white,
         body: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(30, 0, 30, 0),
+          padding: EdgeInsetsDirectional.fromSTEB(30, 0, 30, 40),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,

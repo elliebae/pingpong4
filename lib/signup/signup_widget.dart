@@ -84,13 +84,12 @@ class _SignupWidgetState extends State<SignupWidget> {
         body: Padding(
           padding: EdgeInsetsDirectional.fromSTEB(30, 0, 30, 0),
           child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
-                child: Row(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -127,7 +126,6 @@ class _SignupWidgetState extends State<SignupWidget> {
                     ),
                   ],
                 ),
-              ),
               Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [

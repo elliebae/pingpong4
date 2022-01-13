@@ -1,9 +1,11 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/send_pong_widget.dart';
+import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../home_page/home_page_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -23,24 +25,6 @@ class _AlertWidgetState extends State<AlertWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKey,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Color(0xFF303030)),
-        automaticallyImplyLeading: true,
-        title: Text(
-          '핑퐁 알림',
-          style: FlutterFlowTheme.title1.override(
-            fontFamily: 'GmarketSans',
-            color: Color(0xFF9F00FF),
-            fontWeight: FontWeight.bold,
-            useGoogleFonts: false,
-          ),
-        ),
-        actions: [],
-        centerTitle: true,
-        elevation: 3,
-      ),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
@@ -48,7 +32,7 @@ class _AlertWidgetState extends State<AlertWidget> {
           children: [
             Expanded(
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -56,6 +40,67 @@ class _AlertWidgetState extends State<AlertWidget> {
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
+                          Material(
+                            color: Colors.transparent,
+                            elevation: 3,
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: 80,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.tertiaryColor,
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  FlutterFlowIconButton(
+                                    borderColor: Colors.transparent,
+                                    borderRadius: 30,
+                                    borderWidth: 1,
+                                    buttonSize: 60,
+                                    icon: Icon(
+                                      Icons.arrow_back_ios_rounded,
+                                      color: Colors.black,
+                                      size: 30,
+                                    ),
+                                    onPressed: () async {
+                                      await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              HomePageWidget(),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 10, 0, 0),
+                                    child: Text(
+                                      '핑퐁 알림',
+                                      textAlign: TextAlign.center,
+                                      style:
+                                      FlutterFlowTheme.bodyText1.override(
+                                        fontFamily: 'GmarketSans',
+                                        color: FlutterFlowTheme.primaryColor,
+                                        fontSize: 30,
+                                        fontWeight: FontWeight.bold,
+                                        useGoogleFonts: false,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 60,
+                                    height: 60,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.tertiaryColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                           Expanded(
                             child: StreamBuilder<List<PingpongRecord>>(
                               stream: queryPingpongRecord(
