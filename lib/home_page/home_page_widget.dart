@@ -1,7 +1,6 @@
 import '../alert/alert_widget.dart';
 import '../auth/auth_util.dart';
 import '../components/send_ping_widget.dart';
-import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../landing_page/landing_page_widget.dart';
@@ -22,29 +21,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(0),
-        child: AppBar(
-          backgroundColor: Colors.white,
-          automaticallyImplyLeading: false,
-          leading: FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 30,
-            borderWidth: 1,
-            buttonSize: 60,
-            icon: Icon(
-              Icons.add_box_outlined,
-              color: Colors.black,
-              size: 30,
-            ),
-            onPressed: () {
-              print('IconButton pressed ...');
-            },
-          ),
-          actions: [],
-          elevation: 0,
-        ),
-      ),
       backgroundColor: Colors.white,
       drawer: Drawer(
         elevation: 16,
@@ -266,6 +242,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
@@ -278,6 +255,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     InkWell(
                       onTap: () async {

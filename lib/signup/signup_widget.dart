@@ -81,46 +81,44 @@ class _SignupWidgetState extends State<SignupWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 40),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                              child: Text(
-                                '회원가입',
-                                style: FlutterFlowTheme.title1.override(
-                                  fontFamily: 'GmarketSans',
-                                  color: Color(0xFF9F00FF),
-                                  fontWeight: FontWeight.bold,
-                                  useGoogleFonts: false,
-                                ),
-                              ),
-                            ),
-                            Text(
-                              '아래 정보를 모두 채워주세요!',
-                              style: FlutterFlowTheme.bodyText1.override(
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 40),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                            child: Text(
+                              '회원가입',
+                              style: FlutterFlowTheme.title1.override(
                                 fontFamily: 'GmarketSans',
-                                color: Color(0xFF444444),
-                                fontWeight: FontWeight.w500,
+                                color: Color(0xFF9F00FF),
+                                fontWeight: FontWeight.bold,
                                 useGoogleFonts: false,
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                          Text(
+                            '아래 정보를 모두 채워주세요!',
+                            style: FlutterFlowTheme.bodyText1.override(
+                              fontFamily: 'GmarketSans',
+                              color: Color(0xFF444444),
+                              fontWeight: FontWeight.w500,
+                              useGoogleFonts: false,
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
@@ -507,64 +505,67 @@ class _SignupWidgetState extends State<SignupWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Expanded(
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            if (!formKey.currentState.validate()) {
-                              return;
-                            }
-                            if (checkboxListTileValue1) {
-                              if (passwordTextController.text !=
-                                  confirmPasswordTextController.text) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      "Passwords don't match!",
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                          child: FFButtonWidget(
+                            onPressed: () async {
+                              if (!formKey.currentState.validate()) {
+                                return;
+                              }
+                              if (checkboxListTileValue1) {
+                                if (passwordTextController.text !=
+                                    confirmPasswordTextController.text) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        "Passwords don't match!",
+                                      ),
                                     ),
-                                  ),
+                                  );
+                                  return;
+                                }
+
+                                final user = await createAccountWithEmail(
+                                  context,
+                                  emailTextController.text,
+                                  passwordTextController.text,
                                 );
-                                return;
-                              }
+                                if (user == null) {
+                                  return;
+                                }
 
-                              final user = await createAccountWithEmail(
+                                final usersCreateData = createUsersRecordData(
+                                  phoneNumber: textController2.text,
+                                  displayName: textController1.text,
+                                );
+                                await UsersRecord.collection
+                                    .doc(user.uid)
+                                    .update(usersCreateData);
+                              }
+                              await Navigator.pushAndRemoveUntil(
                                 context,
-                                emailTextController.text,
-                                passwordTextController.text,
+                                MaterialPageRoute(
+                                  builder: (context) => WelcomePageWidget(),
+                                ),
+                                (r) => false,
                               );
-                              if (user == null) {
-                                return;
-                              }
-
-                              final usersCreateData = createUsersRecordData(
-                                phoneNumber: textController2.text,
-                                displayName: textController1.text,
-                              );
-                              await UsersRecord.collection
-                                  .doc(user.uid)
-                                  .update(usersCreateData);
-                            }
-                            await Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => WelcomePageWidget(),
+                            },
+                            text: '시작하기',
+                            options: FFButtonOptions(
+                              width: 130,
+                              height: 54,
+                              color: Color(0xFF9F00FF),
+                              textStyle: FlutterFlowTheme.subtitle2.override(
+                                fontFamily: 'Noto Sans',
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
                               ),
-                              (r) => false,
-                            );
-                          },
-                          text: '시작하기',
-                          options: FFButtonOptions(
-                            width: 130,
-                            height: 54,
-                            color: Color(0xFF9F00FF),
-                            textStyle: FlutterFlowTheme.subtitle2.override(
-                              fontFamily: 'Noto Sans',
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1,
+                              ),
+                              borderRadius: 10,
                             ),
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1,
-                            ),
-                            borderRadius: 10,
                           ),
                         ),
                       ),
