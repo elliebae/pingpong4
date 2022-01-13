@@ -418,6 +418,7 @@ class _SendPingWidgetState extends State<SendPingWidget> {
                                     );
                                   },
                                 );
+                                print("hello");
                                 await actions.sendSlackMessage(
                                   textController3.text,
                                 );
