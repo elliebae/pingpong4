@@ -454,7 +454,8 @@ class _SendPingWidgetState extends State<SendPingWidget> {
                                   '(알 수 없음)',
                                 ),
                                 receiverNumber: textController3.text,
-                                customerId: functions.getReceiver(
+                                customerId: functions.isListEmpty(
+                                    buttonUsersRecordList.toList())? "" : functions.getReceiver(
                                     buttonUsersRecordList
                                         .map((e) => e.reference)
                                         .toList()).id,
