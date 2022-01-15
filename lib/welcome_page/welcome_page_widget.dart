@@ -127,6 +127,7 @@ class _WelcomePageWidgetState extends State<WelcomePageWidget> {
                                   final pingpongUpdateData =
                                   createPingpongRecordData(
                                     receiver: currentUserReference,
+                                    customerId: currentUserReference.id,
                                   );
                                   await columnPingpongRecord.reference
                                       .update(pingpongUpdateData);
